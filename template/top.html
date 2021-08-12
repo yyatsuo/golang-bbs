@@ -1,0 +1,19 @@
+<h1>スレッド一覧</h1>
+
+<div>
+  <ul>
+  {{range .}}
+    <li><a href="">{{.Title}}</a></li>
+  {{end}}
+  </ul>
+</div>
+
+<h1>スレッドを作成する</h1>
+<div>
+  <form action="/create" method="POST">
+    <div>
+      <input type="text" size="50" name="title">
+      <input type="submit" value="スレッドを作成">
+    </div>
+  </form>
+</div>
