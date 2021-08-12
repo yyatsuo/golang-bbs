@@ -128,7 +128,7 @@ func addCommentHandler(writer http.ResponseWriter, request *http.Request) {
 	file, err := os.OpenFile(datfile, options, os.FileMode(0600))
 	check(err)
 	defer file.Close()
-	fmt.Fprintf(file, "%s,%s,%s", name, date, comment)
+	fmt.Fprintf(file, "%s,%s,%s\n", name, date, comment)
 
 	http.Redirect(writer, request, "/view?id="+id+"&title="+title, http.StatusFound)
 }
