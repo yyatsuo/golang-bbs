@@ -1,0 +1,26 @@
+<h1>{{.Title}}</h1>
+<div>
+
+{{range .Comments}}
+  <div>
+    <p>名前：{{ .Name }} {{ .Date }}</p>
+    <p>{{ .Cont }}</p>
+  </div>
+{{ else }}
+  <div>
+    <p>コメントはまだありません</p>
+  </div>
+{{ end }}
+
+<h2>コメントする</h2>
+<form action="/comment" method="POST">
+  <div>
+    名前<br />
+    <input type="text" size="20" name="name"><br />
+    コメント<br />
+    <textarea rows="10" cols="60" name="comment"></textarea><br />
+    <input type="hidden" value={{.Title}} name="title">
+    <input type="hidden" value={{.Id}} name="id">
+    <input type="submit">
+  </div>
+<p><a href="/">戻る</a></p>
