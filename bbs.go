@@ -16,7 +16,6 @@ import (
 )
 
 var workdir string
-var host string
 var port string
 
 type Comment struct {
@@ -138,22 +137,18 @@ func main() {
 	if workdir == "" {
 		workdir, _ = os.Getwd()
 	}
-	host = os.Getenv("GOLANG_BBS_HOST")
-	if host == "" {
-		host = "localhost"
-	}
 	port = os.Getenv("GOLANG_BBS_PORT")
 	if port == "" {
 		port = "8080"
 	}
 	fmt.Println("Start Server")
-	fmt.Println("Host     ", host, port)
+	fmt.Println("Port     ", port)
 	fmt.Println("Workdir  ", workdir)
 
 	http.HandleFunc("/", threadListHandler)
 	http.HandleFunc("/create", threadCreateHandler)
 	http.HandleFunc("/view", threadViewHandler)
 	http.HandleFunc("/comment", addCommentHandler)
-	err := http.ListenAndServe(host+":"+port, nil)
+	err := http.ListenAndServe(":"+port, nil)
 	log.Fatal(err)
 }
