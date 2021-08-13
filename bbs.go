@@ -137,7 +137,7 @@ func main() {
 	if workdir == "" {
 		workdir, _ = os.Getwd()
 	}
-	port = os.Getenv("GOLANG_BBS_PORT")
+	port = os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
