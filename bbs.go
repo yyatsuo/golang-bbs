@@ -16,6 +16,7 @@ import (
 )
 
 var workdir string
+var tmpldir string
 var port string
 
 type Comment struct {
@@ -57,7 +58,7 @@ func threadListHandler(writer http.ResponseWriter, request *http.Request) {
 		check(err)
 		threads = append(threads, Thread{Title: record[0], Id: record[1]})
 	}
-	html, err := template.New("top.html").ParseFiles(workdir + "/template/top.html")
+	html, err := template.New("top.html").ParseFiles(tmpldir + "/template/top.html")
 	check(err)
 	err = html.Execute(writer, threads)
 	check(err)
@@ -99,7 +100,7 @@ func threadViewHandler(writer http.ResponseWriter, request *http.Request) {
 			return template.HTML(strings.Replace(s, "\r\n", "<br>", -1))
 		},
 	}
-	html, err := template.New("view.html").Funcs(funcMap).ParseFiles(workdir + "/template/view.html")
+	html, err := template.New("view.html").Funcs(funcMap).ParseFiles(tmpldir + "/template/view.html")
 	check(err)
 	check(html.Execute(writer, thread))
 }
@@ -137,6 +138,10 @@ func main() {
 	if workdir == "" {
 		workdir, _ = os.Getwd()
 	}
+	tmpldir = os.Getenv("GOLANG_BBS_TMPLDIR")
+	if tmpldir == "" {
+		tmpldir, _ = os.Getwd()
+	}
 	port = os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -144,6 +149,7 @@ func main() {
 	fmt.Println("Start Server")
 	fmt.Println("Port     ", port)
 	fmt.Println("Workdir  ", workdir)
+	fmt.Println("Tmpldir  ", tmpldir)
 
 	http.HandleFunc("/", threadListHandler)
 	http.HandleFunc("/create", threadCreateHandler)
