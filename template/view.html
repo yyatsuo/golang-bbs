@@ -3,8 +3,8 @@
 
 {{range .Comments}}
   <div>
-    <p>名前：{{ .Name }} {{ .Date }}</p>
-    <p>{{ .Cont }}</p>
+    <p><strong>名前：{{ .Name }} {{ .Date }}</strong></p>
+    <p>{{ .Cont | crlf2br }}</p>
   </div>
 {{ else }}
   <div>
@@ -19,7 +19,6 @@
     <input type="text" size="20" name="name"><br />
     コメント<br />
     <textarea rows="10" cols="60" name="comment"></textarea><br />
-    <input type="hidden" value={{.Title}} name="title">
     <input type="hidden" value={{.Id}} name="id">
     <input type="submit">
   </div>
