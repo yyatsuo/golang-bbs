@@ -1,10 +1,37 @@
-<h1>{{.Title}}</h1>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{.Title}} - GOLANG BBS</title>
+  <style>
+  body {
+  }
+  h1#title {
+    display: block;
+  }
+  span.name {
+    font-weight:bold;
+  }
+  span.date {
+    font-style: italic;
+    margin-left: 1em;
+  }
+  p.comment {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    margin-left: 1.5em;
+  }
+  </style>
+</head>
+<body>
+<h1 id="title">{{.Title}}</h1>
 <div>
 
 {{range .Comments}}
   <div>
-    <p><strong>名前：{{ .Name }} {{ .Date }}</strong></p>
-    <p>{{ .Cont | crlf2br }}</p>
+    <span class="name">名前：{{ .Name }} </span>
+    <span class="date"> {{ .Date }}</span>
+    <p class="comment">{{ .Cont | crlf2br }}</p>
   </div>
 {{ else }}
   <div>
@@ -23,3 +50,5 @@
     <input type="submit">
   </div>
 <p><a href="/">戻る</a></p>
+</body>
+</html>

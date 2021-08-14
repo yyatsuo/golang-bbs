@@ -1,7 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>GOLANG BBS</title>
+  <style>
+  body {
+  }
+  h1 {
+    display: block;
+    border: dotted;
+    border-radius:10px;
+  }
+  div#threads {
+    color: black;
+  }
+  ul#thread_list {
+    list-style-type: "\1F44D";
+  }
+  div#form {
+  }
+  </style>
+</head>
+<body>
 <h1>スレッド一覧</h1>
-
-<div>
-  <ul>
+<div id="threads">
+  <ul id="thread_list">
   {{range .}}
     <li><a href="view?id={{.Id}}">{{.Title}}</a></li>
   {{end}}
@@ -9,7 +32,7 @@
 </div>
 
 <h1>スレッドを作成する</h1>
-<div>
+<div id="form">
   <form action="/create" method="POST">
     <div>
       <input type="text" size="50" name="title">
@@ -17,3 +40,5 @@
     </div>
   </form>
 </div>
+</body>
+</html>
